@@ -1,7 +1,7 @@
 
 name: Generate Commit Invaders
 
-on:
+"on":
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
@@ -14,6 +14,11 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      - uses: Goblinlordx/commit-invaders@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_user_name: ${{ github.repository_owner }}
 
       - uses: Goblinlordx/commit-invaders@v1
         with:
