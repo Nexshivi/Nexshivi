@@ -1,27 +1,30 @@
 
 name: Generate Commit Invaders
 
-"on":
+on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 jobs:
   generate:
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate Commit Invaders
+        uses: Goblinlordx/commit-invaders@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_user_name: ${{ github.repository_owner }}
+
 
       - uses: Goblinlordx/commit-invaders@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           github_user_name: ${{ github.repository_owner }}
-
-      - uses: Goblinlordx/commit-invaders@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          github_user_name: ${{ github.repository_owner }}
-
